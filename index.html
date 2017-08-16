@@ -4,5 +4,35 @@
     <title>testing testing 123</title>
   </head>
   <body>
+    <script>
+      // Initializing our Auth0Lock
+      var lock = new Auth0Lock(
+        'iktRj1eHMrCkl2bo1bQXYAhbaxq-kbjG',
+        'franz.auth0.com'
+      );
+      
+      // Listening for the authenticated event
+      lock.on("authenticated", function(authResult) {
+        // Use the token in authResult to getUserInfo() and save it to localStorage
+        lock.getUserInfo(authResult.accessToken, function(error, profile) {
+          if (error) {
+            // Handle error
+            return;
+          }
+
+          document.getElementById('nick').textContent = profile.nickname;
+
+          localStorage.setItem('accessToken', authResult.accessToken);
+          localStorage.setItem('profile', JSON.stringify(profile));
+        });
+      });
+      document.getElementById('btn-login').addEventListener('click', function() {
+        lock.show();
+      });
+    </script>
+    <button id="btn-login">
+      Log In
+    </button>
+    <h2>Welcome <span id="nick" class="nickname"></span></h2>
   </body>
 </html>
