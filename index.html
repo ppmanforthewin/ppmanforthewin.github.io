@@ -25,10 +25,16 @@
           localStorage.setItem('profile', JSON.stringify(profile));
         });
       });
+      lock.getUserInfo(accessToken, function(error, profile) {
+        if (!error) {
+          document.getElementById('hobby').textContent = profile.user_metadata.hobby;
+        }
+      });
     </script>
   </head>
   <body>
     <h2>Welcome <span id="nick" class="nickname"></span></h2>
     <button onclick="lock.show();">Login</button>
+    <span id="hobby"></span>
   </body>
 </html>
