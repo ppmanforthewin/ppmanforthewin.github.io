@@ -32,7 +32,7 @@
       "url": "https://franz.auth0.com/api/v2/users/" + getUserInfo(user_id, callback),
       "method": "PATCH",
       "headers": {
-        "authorization": "Bearer + lock.getUserInfo(authResult.accessToken),
+        "authorization": "Bearer" + lock.getUserInfo(authResult.accessToken),
         "content-type": "application/json"
       },
       "processData": false,
