@@ -18,15 +18,13 @@
             // Handle error
             return;
           }
+          if (!error){
+            document.getElementById('hobby').textContent = profile.user_metadata.hobby;
+          }
           document.getElementById('nick').textContent = profile.nickname;
           localStorage.setItem('accessToken', authResult.accessToken);
           localStorage.setItem('profile', JSON.stringify(profile));
         });
-      });
-      lock.getUserInfo(accessToken, function(error, profile) {
-        if (!error) {
-          document.getElementById('hobby').textContent = profile.user_metadata.hobby;
-        }
       });
     </script>
   </head>
