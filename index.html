@@ -3,8 +3,14 @@
   <head>
     <title>testing testing 123</title>
     <script src="https://cdn.auth0.com/js/lock/10.20.0/lock.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script><script>
-      // Initializing our Auth0Lock
+    <script src="https://cdn.auth0.com/js/auth0/8.0.0/auth0.min.js"></script>
+    <script>
+    var auth0 = require('auth0-js');
+    var auth0 = new Auth0({
+      domain: "franz.auth0.com",
+      clientID: "iktRj1eHMrCkl2bo1bQXYAhbaxq-kbjG"
+    });
+    // Initializing our Auth0Lock
       var lock = new Auth0Lock(
         'iktRj1eHMrCkl2bo1bQXYAhbaxq-kbjG',
         'franz.auth0.com'
@@ -26,22 +32,23 @@
           localStorage.setItem('profile', JSON.stringify(profile));
         });
       });
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "https://franz.auth0.com/api/v2/users/" + lock.getUserInfo(user_id, callback),
-      "method": "PATCH",
-      "headers": {
-        "authorization": "Bearer" + lock.getUserInfo(authResult.accessToken),
-        "content-type": "application/json"
-      },
-      "processData": false,
-      "data": "{\"user_metadata\": {\"addresses\": {\"home\": \"123 Main Street, Anytown, ST 12345\"}}}"
-}
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
+      if (!error){
+        function(user, context, callback){
+          user.user_metadata = user.user_metadata || {};
+          // update the user_metadata that will be part of the response
+          user.user_metadata.preferences = user.user_metadata.preferences || {};
+          user.user_metadata.preferences.fontSize = 12;
+          
+          // persist the user_metadata update
+          auth0.users.updateUserMetadata(user.user_id, user.user_metadata)
+            .then(function(){
+            callback(null, user, context);
+          })
+            .catch(function(err){
+            callback(err);
+          });
+        }
+      }
     </script>
   </head>
   <body>
