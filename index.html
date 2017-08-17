@@ -3,7 +3,7 @@
   <head>
     <title>testing testing 123</title>
     <script src="https://cdn.auth0.com/js/lock/10.20.0/lock.min.js"></script>
-    <script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script><script>
       // Initializing our Auth0Lock
       var lock = new Auth0Lock(
         'iktRj1eHMrCkl2bo1bQXYAhbaxq-kbjG',
@@ -26,6 +26,22 @@
           localStorage.setItem('profile', JSON.stringify(profile));
         });
       });
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://franz.auth0.com/api/v2/users/" + getUserInfo(user_id, callback),
+      "method": "PATCH",
+      "headers": {
+        "authorization": "Bearer + lock.getUserInfo(authResult.accessToken),
+        "content-type": "application/json"
+      },
+      "processData": false,
+      "data": "{\"user_metadata\": {\"addresses\": {\"home\": \"123 Main Street, Anytown, ST 12345\"}}}"
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
     </script>
   </head>
   <body>
