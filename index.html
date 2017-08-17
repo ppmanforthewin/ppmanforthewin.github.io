@@ -29,7 +29,7 @@
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "https://franz.auth0.com/api/v2/users/" + getUserInfo(user_id, callback),
+      "url": "https://franz.auth0.com/api/v2/users/" + lock.getUserInfo(user_id, callback),
       "method": "PATCH",
       "headers": {
         "authorization": "Bearer" + lock.getUserInfo(authResult.accessToken),
