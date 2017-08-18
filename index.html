@@ -45,7 +45,7 @@
     <script>
       function writeUserData(userId, name, email, imageUrl) {
         firebase.database().ref('users/' + userId).set({
-          username: "bob,
+          username: "bob",
           email: "foo@bar.com"
         });
     </script>
