@@ -45,12 +45,12 @@
     <script>
       function writeUserData(userId, name, email, imageUrl) {
         firebase.database().ref('users/' + "userId").set({
-          username: "bob",
+          username: name,
           email: "foo@bar.com"
         });
       }
       var user="mike"
     </script>
-    <button onclick="writeUserData(user)">Submit</button>
+    <button onclick="writeUserData(userId, user)">Submit</button>
   </body>
 </html>
