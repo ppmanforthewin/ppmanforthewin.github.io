@@ -137,7 +137,7 @@ body.page-template-page-fullsingle-split {
         width: 100%; } }
   .fs-split .split-content {
     width: 50%;
-    min-height: 100vh;
+    min-height: 50vh;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
